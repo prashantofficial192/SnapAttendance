@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SnapAttendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .roles {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .role-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .role-img {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            margin-top: 1%;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            border-radius: 100%;
+            overflow: hidden;
+            border: 3px solid #231a6f;
+        }
+
+        .role-title {
+            margin-top: 10%;
+            font-size: 20px;
+        }
+
+        .role-img:hover {
+            transform: scale(1.1);
+            border-color: #0f054c;
+            box-shadow: 0 0 10px rgba(15, 5, 76, 0.7);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            left: 10px;
+            text-decoration:none;   
+            background-color: #231a6f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0f054c;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 5%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .role-img {
+                width: 120px;
+                height: 120px;
+                padding: 30px;
+            }
+
+            .role-title {
+                margin-top: 5%;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .back-button {
+                width: 25%;
+                height: 6%;
+                top: 10px;
+                left: 10px;
+                position: absolute;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            h1 {
+                margin-top: 25%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="back-button" href="{{ url_for('teacher_login')}}">Back</a>
+    <h1>What would you like to do</h1>
+    <div class="roles">
+        <div class="role-container">
+            <img src="static/images/roll-call.png" alt="Student" class="role-img" onclick="chooseRole('attendance')">
+            <p class="role-title">Take Attendance</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/follow.png" alt="Teacher" class="role-img" onclick="chooseRole('addStudent')">
+            <p class="role-title">Add Student</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/focus.png" alt="Teacher" class="role-img" onclick="chooseRole('capture')">
+            <p class="role-title">Capture Images</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/update.png" alt="Teacher" class="role-img" onclick="chooseRole('update')">
+            <p class="role-title">Update Records</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/student-card.png" alt="Teacher" class="role-img" onclick="chooseRole('records')">
+            <p class="role-title">Student Records</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/face-scan2.png" alt="Teacher" class="role-img"
+                onclick="chooseRole('attendanceRecord')">
+            <p class="role-title">Attendance Records</p>
+        </div>
+        <div class="role-container">
+            <img src="static/images/folder.png" alt="Teacher" class="role-img" onclick="chooseRole('exportRecord')">
+            <p class="role-title">Export Records</p>
+        </div>
+    </div>
+
+    <script>
+        function chooseRole(role) {
+            if (role === 'attendance') {
+                window.location.href = "{{ url_for('attendance_app')}}";
+            } else if (role === 'addStudent') {
+                window.location.href = "{{ url_for('add_student')}}";
+            } else if (role === 'capture') {
+                window.location.href = "{{ url_for('webcam_capture_app')}}";
+            } else if (role == 'update') {
+                window.location.href = "{{ url_for('update_records')}}";
+            } else if (role === 'records') {
+                window.location.href = "{{ url_for('student_records')}}";
+            } else if (role == 'attendanceRecord') {
+                window.location.href = "{{ url_for('attendance_records')}}";
+            } else if (role == 'exportRecord') {
+                window.location.href = "{{ url_for('export_records')}}";
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>

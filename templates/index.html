@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="static/images/favicon.png" type="" />
+
+    <title>SnapAttendance</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+
+    <!-- font awesome style -->
+    <link href="static/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="static/css/responsive.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="hero_area">
+      <div class="hero_bg_box">
+        <div class="bg_img_box">
+          <img src="static/images/hero-bg.png" alt="hero" />
+        </div>
+      </div>
+
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <h2>Snap<span>Attendance</span></h2>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#home"
+                    >Home <span class="sr-only">(current)</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#about"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#service">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#why">Why Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#team">Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('login') }}">
+                    <i class="fa fa-user" aria-hidden="true"></i> Login</a
+                  >
+                </li>
+                <form class="form-inline">
+                  <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- end header section -->
+      <!-- slider section -->
+      <section class="slider_section" id="home">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="detail-box">
+                      <h1>
+                        SnapAttendance <br />
+                        Precision
+                      </h1>
+                      <p>
+                        Introducing SnapAttendance, a cutting-edge solution for
+                        hassle-free attendance tracking. Utilizing advanced face
+                        recognition technology, our user-friendly interface
+                        ensures a seamless experience for both students and
+                        teachers. With an intuitive dashboard facility, managing
+                        attendance records has never been more efficient.
+                      </p>
+                      <div class="btn-box">
+                        <a href="" class="btn1"> Read More </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="img-box">
+                      <img src="static/images/Banneer1.png" alt=banner1"">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="detail-box">
+                      <h1>
+                        Easy to <br />
+                        Monitor
+                      </h1>
+                      <p>
+                        Discover the simplicity of attendance tracking with
+                        SnapAttendance. Our cutting-edge face recognition
+                        technology and user-friendly interface make monitoring
+                        attendance a breeze for both students and teachers. Say
+                        goodbye to traditional methods and embrace the ease of
+                        attendance management.
+                      </p>
+                      <div class="btn-box">
+                        <a
+                          href="https://www.example.com/"
+                          target=""
+                          class="btn1"
+                        >
+                          Read More
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="img-box">
+                      <img src="static/images/Banner2.png" alt="banner2" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="detail-box">
+                      <h1>
+                        Safely Store <br />
+                        Data
+                      </h1>
+                      <p>
+                        Rest assured with SnapAttendance as we prioritize the
+                        security of your data. Our system employs
+                        state-of-the-art secure storage, ensuring that sensitive
+                        information is protected with the utmost care.
+                        Experience peace of mind knowing that your attendance
+                        records are stored safely and confidentially
+                      </p>
+                      <div class="btn-box">
+                        <a href="" class="btn1"> Read More </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="img-box">
+                      <img src="static/images/Banner3.png" alt="banner3" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="carousel-indicators">
+            <li
+              data-target="#customCarousel1"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li data-target="#customCarousel1" data-slide-to="1"></li>
+            <li data-target="#customCarousel1" data-slide-to="2"></li>
+          </ol>
+        </div>
+      </section>
+      <!-- end slider section -->
+    </div>
+
+    <!-- service section -->
+
+    <section class="service_section layout_padding" id="service">
+      <div class="service_container">
+        <div class="container">
+          <div class="heading_container heading_center">
+            <h2>Our <span>Services</span></h2>
+            <p>
+              Ensuring easy attendance monitoring and secure data storage
+              through innovative face recognition technology and robust security
+              measures
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box">
+                <div class="img-box">
+                  <img
+                    src="static/images/face-recognition2.png"
+                    alt="face-recognition2"
+                  />
+                </div>
+                <div class="detail-box">
+                  <h5>Face Recognition</h5>
+                  <p>
+                    Experience the future of attendance tracking with our
+                    cutting-edge Face Recognition technology, ensuring accurate
+                    and efficient record-keeping
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box">
+                <div class="img-box">
+                  <img src="static/images/security.png" alt="security" />
+                </div>
+                <div class="detail-box">
+                  <h5>Secure Storage</h5>
+                  <p>
+                    Our secure storage maintaining the safety of sensitive
+                    data.We prioritize the confidentiality of your information,
+                    ensuring a trusted and protected environment for all records
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box">
+                <div class="img-box">
+                  <img src="static/images/social-media.png" alt="secure" />
+                </div>
+                <div class="detail-box">
+                  <h5>User-Friendly Interface</h5>
+                  <p>
+                    A user-friendly interface makes managing attendance a breeze
+                    for both students and educators
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end service section -->
+
+    <!-- about section -->
+
+    <section class="about_section layout_padding" id="about">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>About <span>Us</span></h2>
+          <p>
+            Empowering Education with SnapAttendance, Revolutionizing Attendance
+            Management
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="img-box">
+              <img src="static/images/weare.png" alt="Attendance" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="detail-box">
+              <h3>We Are SnapAttendance</h3>
+              <p>
+                At SnapAttendance, we are dedicated to transforming traditional
+                attendance tracking into a streamlined, efficient process. Our
+                commitment to innovation is embodied in the integration of
+                cutting-edge face recognition technology, providing a seamless
+                experience for both educators and students. With a user-friendly
+                interface and state-of-the-art secure data storage, we
+                prioritize precision, security, and ease in attendance
+                management. Join us on this journey to redefine the future of
+                education with SnapAttendance.
+              </p>
+              <a href="https://www.example.com/" target="_blank"> Read More </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end about section -->
+
+    <!-- why section -->
+
+    <section class="why_section layout_padding" id="why">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>Why Choose <span>Us</span></h2>
+        </div>
+        <div class="why_container">
+          <div class="box">
+            <div class="img-box">
+              <img src="static/images/face-scan.png" alt="face-scan" />
+            </div>
+            <div class="detail-box">
+              <h5>Face Recognition Model</h5>
+              <p>
+                Our cutting-edge face recognition model sets us apart, ensuring
+                unparalleled accuracy in attendance tracking. Say goodbye to
+                manual processes and embrace the future of education with a
+                system that recognizes faces with precision, promoting a
+                seamless and error-free experience.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img src="static/images/real-time.png" alt="real-time" />
+            </div>
+            <div class="detail-box">
+              <h5>Time Saving</h5>
+              <p>
+                SnapAttendance is designed to save valuable time for educators
+                and institutions. With automated face recognition, the
+                cumbersome task of manual attendance tracking becomes a thing of
+                the past. This efficiency allows educators to focus more on
+                teaching, enhancing productivity and creating a more dynamic
+                learning environment.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img src="static/images/protection.png" alt="protection" />
+            </div>
+            <div class="detail-box">
+              <h5>Secure Investment</h5>
+              <p>
+                Investing in SnapAttendance means investing in the security and
+                confidentiality of your data. Our robust secure storage ensures
+                that sensitive information is protected, providing a reliable
+                and secure platform for attendance management. Trust us to
+                safeguard your data, making your investment in SnapAttendance a
+                secure one.
+              </p>
+            </div>
+          </div>
+          <div class="box">
+            <div class="img-box">
+              <img
+                src="static/images/project-management.png"
+                alt="project-management"
+              />
+            </div>
+            <div class="detail-box">
+              <h5>Easy to Manage</h5>
+              <p>
+                SnapAttendance simplifies attendance management with its
+                user-friendly interface. Navigating through the system is
+                intuitive, making it easy for both educators and students. Enjoy
+                a hassle-free experience in managing attendance records,
+                fostering a more efficient and organized educational
+                environment.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="btn-box">
+        <a href="">
+          Read More
+        </a>
+      </div> -->
+      </div>
+    </section>
+
+    <!-- end why section -->
+
+    <!-- team section -->
+    <section class="team_section layout_padding" id="team">
+      <div class="container-fluid">
+        <div class="heading_container heading_center">
+          <h2 class="">Our <span> Team</span></h2>
+        </div>
+
+        <div class="team_container">
+          <div class="row">
+            <div class="col-lg-3 col-sm-6">
+              <div class="box">
+                <div class="img-box">
+                  <img
+                    src="static//images/Prashant.jpg"
+                    class="img1"
+                    alt="Prashant"
+                  />
+                </div>
+                <div class="detail-box">
+                  <h5>Prashant Chaute</h5>
+                  <p>Backend Developer</p>
+                </div>
+                <div class="social_box">
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="box">
+                <div class="img-box">
+                  <img
+                    src="static/images/Krupali2.jpg"
+                    class="img1"
+                    alt="Krushita"
+                  />
+                </div>
+                <div class="detail-box">
+                  <h5>Krushita Bheda</h5>
+                  <p>Frontend Developer</p>
+                </div>
+                <div class="social_box">
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+              <div class="box">
+                <div class="img-box">
+                  <img
+                    src="static/images/kishor.jpg"
+                    class="img1"
+                    alt="kishor"
+                  />
+                </div>
+                <div class="detail-box">
+                  <h5>Kishor Nikhare</h5>
+                  <p>Database Handler</p>
+                </div>
+                <div class="social_box">
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                  </a>
+                  <a href="https://www.example.com/" target="_blank">
+                    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end team section -->
+
+    <!-- info section -->
+
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_contact">
+              <h4>Contact us</h4>
+              <div class="contact_link_box">
+                <a
+                  href="https://www.google.com/maps/place/Surat,+Gujarat/@21.1594406,72.6574822,11z/data=!3m1!4b1!4m6!3m5!1s0x3be04e59411d1563:0xfe4558290938b042!8m2!3d21.1702401!4d72.8310607!16zL20vMDFoMWhu?authuser=0&entry=ttu"
+                  target="_blank"
+                >
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span> Location </span>
+                </a>
+                <a href="https://www.example.com/" target="_blank">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <span> +91 81280 33899 </span>
+                </a>
+                <a href="https://www.example.com/" target="_blank">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span> snapattendance@gmail.com </span>
+                </a>
+              </div>
+            </div>
+            <div class="info_social">
+              <a href="https://www.example.com/" target="_blank">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.example.com/" target="_blank">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.example.com/" target="_blank">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="https://www.example.com/" target="_blank">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 info_col">
+            <div class="info_detail">
+              <h4>Info</h4>
+              <p>
+                Explore our website for seamless attendance tracking using
+                advanced face recognition and secure data storage,
+                revolutionizing efficiency in education management
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-2 mx-auto info_col">
+            <div class="info_link_box">
+              <h4>Links</h4>
+              <div class="info_links">
+                <a class="active" href="#home"> Home </a>
+                <a class="" href="#about"> About </a>
+                <a class="" href="#service"> Services </a>
+                <a class="" href="#why"> Why Us </a>
+                <a class="" href="#team"> Team </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 info_col">
+            <h4>Subscribe</h4>
+            <form action="#">
+              <input type="text" placeholder="Enter email" />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end info section -->
+
+    <!-- footer section -->
+    <section class="footer_section">
+      <div class="container">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          SnapAttendance
+        </p>
+      </div>
+    </section>
+    <!-- footer section -->
+
+    <!-- jQery -->
+    <script type="text/javascript" src="static/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="static/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    ></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="static/js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+    <!-- End Google Map -->
+  </body>
+</html>

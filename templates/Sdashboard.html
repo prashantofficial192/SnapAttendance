@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+        }
+
+        .student-info-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 3%;
+        }
+
+        .student-details {
+            text-align: left;
+            color: black;
+        }
+
+        .student-details h2 {
+            margin: 0;
+            font-size: 4.5em;
+        }
+
+        .student-details p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .logout-button {
+            padding: 15px 20px;
+            background-color: #FE2F15;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 150px;
+        }
+
+        .box-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 2%;
+        }
+
+        .box {
+            width: 30%;
+            height: 200px;
+            background-color: #20BF54;
+            color: #fff;
+            text-align: center;
+            line-height: 170px;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            border-radius: 60px;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        }
+
+        .box1 {
+            width: 30%;
+            height: 200px;
+            background-color: #C12546;
+            color: #fff;
+            text-align: center;
+            line-height: 170px;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            border-radius: 60px;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        }
+
+        .box2 {
+            width: 30%;
+            height: 200px;
+            background-color: #3E168F;
+            color: #fff;
+            text-align: center;
+            line-height: 170px;
+            font-size: 1.5rem;
+            font-weight: bolder;
+            border-radius: 60px;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        }
+
+        .recent-attendance-container {
+            padding: 3%;
+        }
+
+        .recent-attendance-container h1 {
+            text-align: center;
+            color: black;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            border-bottom: 2px solid #C6C4CC;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .attendance-table thead th {
+            background-color: #4FC3A1;
+            color: white;
+        }
+
+        .attendance-table thead th:nth-child(odd) {
+            background-color: #093162;
+        }
+
+        .attendance-table tbody tr:nth-child(even) td {
+            background-color: #ffffff;
+        }
+
+        .attendance-table tbody tr:nth-child(odd) td {
+            background-color: #C6C4CC;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .student-info-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .student-name {
+                font-size: 16px;
+            }
+
+            .student-class {
+                font-size: 12px;
+            }
+
+            .box-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .box,
+            .box1,
+            .box2 {
+                width: 100%;
+                margin-bottom: 40px;
+                margin-left: 25px;
+            }
+
+            .attendance-table th,
+            .attendance-table td {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .recent-attendance-container h2 {
+                margin-left: 50px;
+            }
+
+            /* Adjust the logout button position on mobile only */
+            .logout-button {
+                margin-top: 10px;
+                /* Adjust the margin from the top */
+                margin-right: 10px;
+                /* Adjust the margin from the right */
+            }
+
+            /* Align student details to center on mobile */
+            .student-details {
+                text-align: center;
+                margin-top: 10px;
+                /* Adjust the margin from the top */
+            }
+        }
+    </style>
+    <title>Student Dashboard</title>
+</head>
+
+<body>
+
+    <!-- Student Information Section -->
+    <div class="student-info-container">
+        <div class="student-details">
+            <h2 class="student-name">{{ student_name }}</h2>
+            <p>Student ID: {{ student_id }}</p>
+            <p class="student-roll">Roll Number: {{ roll_number }}</p>
+            <p class="student-class">Class: {{ student_class }}</p>
+            <p class="student-division">Division: {{ student_division }}</p>
+        </div>
+        <a href="{{ url_for('slogin.logout') }}"><button class="logout-button">Logout</button></a>
+    </div>
+
+    <!-- Box Container Section -->
+    <div class="box-container">
+        <div class="box">Total Lectures : 8</div>
+        <div class="box1">Attended Lectures : {{ attendance_count }}</div>
+        <div class="box2">Percentage Attendance : {{ attendance_percentage }}%</div>
+    </div>
+    </div>
+
+    <!-- Recent Attendance Container -->
+    <div class="recent-attendance-container">
+        <h1>Recent Attendance Records</h1>
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Attendance Time</th>
+                    <th>Status</th>
+                    <th>Subject</th>
+                    <th>Teacher Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in recent_records %}
+                <tr>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[5] }}</td>
+                    <td>{{ record[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>

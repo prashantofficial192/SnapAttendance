@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SnapAttendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .roles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .role-img {
+            width: 10%;
+            height: auto;
+            padding: 2%;
+            margin-top: 1%;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            border-radius: 100%;
+            overflow: hidden;
+            border: 3px solid #231a6f;
+        }
+        .role-title {
+            margin-top: 1%;
+            font-size: 20px;
+        }
+
+        .role-img:hover {
+            transform: scale(1.1);
+            border-color: #0f054c;
+            box-shadow: 0 0 10px rgba(15, 5, 76, 0.7);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #231a6f;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0f054c;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .roles {
+                flex-direction: column;
+                margin-bottom: 10%;
+            }
+
+            h1 {
+                margin-top: 25%;
+            }
+
+            .role-img {
+                width: 40%;
+                margin-bottom: 20px;
+                padding: 5%;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1>Choose Your Role</h1>
+    <div class="roles">
+        <img src="static/images/audience.png" alt="Student" class="role-img" onclick="chooseRole('student')">
+        <p class="role-title">Student</p>
+        <img src="static/images/teacher.png" alt="Teacher" class="role-img" onclick="chooseRole('teacher')">
+        <p class="role-title">Teacher</p>
+    </div>
+
+    <script>
+        function chooseRole(role) {
+            if (role === 'student') {
+                window.location.href = "{{ url_for('student_login') }}";
+            } else if (role === 'teacher') {
+                window.location.href = "{{ url_for('teacher_login') }}";
+            }
+        }
+
+        function goBack() {
+            window.location.href= "{{ url_for('index_page') }}";
+        }
+    </script>
+</body>
+
+</html>

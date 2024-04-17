@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Export Records</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: linear-gradient(
+          25deg,
+          #cf4633,
+          #be5368,
+          #a35f9c,
+          #706bd2
+        );
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .export-container,
+      .export-container2,
+      .export-container3 {
+        text-align: center;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        border-radius: 50px;
+        width: 80%;
+        max-width: 400px;
+        margin: 35px;
+        margin-top: 7%;
+      }
+
+      h2 {
+        color: black;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-weight: bold;
+        font-size: 14px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-weight: bold;
+        font-size: 14px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+
+      .export1,
+      .export2,
+      .export3 {
+        background-color: #4d65cc;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .export1:hover {
+        background-color: #1c2dc7;
+      }
+
+      .export2:hover {
+        background-color: #1c2dc7;
+      }
+
+      .export3:hover {
+        background-color: #1c2dc7;
+      }
+      .back-button {
+        position: absolute;
+        top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        left: 10px;
+        background-color: #231a6f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #0f054c;
+      }
+
+      @media screen and (max-width: 600px) {
+        body {
+          flex-direction: column;
+          margin-top: -12%;
+          padding: 0;
+          background-size: cover;
+          background-repeat: no-repeat;
+          min-height: 150vh;
+        }
+
+        .export-container,
+        .export-container2,
+        .export-container3 {
+          width: 80%;
+          margin: 4% 5%;
+        }
+        .back-button {
+          width: 30%;
+          height: 6%;
+          position: absolute;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    </style>
+    <script>
+      function validateForm1() {
+        var from = document.getElementById("from").value;
+        var to = document.getElementById("to").value;
+
+        if (from === "" || to === "") {
+          alert("Please enter values for both 'From' and 'To' fields.");
+          return false;
+        }
+
+        return true;
+      }
+
+      function validateForm2() {
+        var studentID = document.getElementById("studentID").value;
+        var attendanceDate = document.getElementById("attendanceDate").value;
+
+        if (studentID === "" || attendanceDate === "") {
+          alert("Please enter values for both 'Student ID' and 'Date' fields.");
+          return false;
+        }
+
+        return true;
+      }
+
+      function validateForm3() {
+        var from2 = document.getElementById("from2").value;
+        var to2 = document.getElementById("to2").value;
+        var dateSelect = document.getElementById("dateSelect").value;
+
+        if (from2 === "" || to2 === "" || dateSelect === "") {
+          alert("Please enter values for all fields.");
+          return false;
+        }
+
+        return true;
+      }
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </head>
+
+  <body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="export-container">
+      <h2>Students Records</h2>
+      <form
+        action="{{ url_for('export_records.export_csv') }}"
+        method="POST"
+        onsubmit="return validateForm1()"
+      >
+        <label for="from">From</label>
+        <input
+          type="text"
+          id="from"
+          name="from"
+          placeholder="Enter Student ID"
+        />
+        <br />
+        <label for="to">To</label>
+        <input type="text" id="to" name="to" placeholder="Enter Student ID" />
+        <br />
+        <button type="submit" class="export1">Export CSV</button>
+      </form>
+    </div>
+    <div class="export-container2">
+      <h2>Student Attendance Record</h2>
+      <form
+        action="{{ url_for('export_records.export_attendance_csv') }}"
+        method="POST"
+        onsubmit="return validateForm2()"
+      >
+        <label for="studentID">Student ID:</label>
+        <input
+          type="text"
+          id="studentID"
+          name="studentID"
+          placeholder="Enter Student ID"
+        />
+        <br />
+        <label for="attendanceDate">Date:</label>
+        <input type="date" id="attendanceDate" name="attendanceDate" />
+        <br />
+        <button type="submit" class="export2">Export CSV</button>
+      </form>
+    </div>
+    <div class="export-container3">
+      <h2>Attendance Data</h2>
+      <form
+        action="{{ url_for('export_records.export_class_div_csv') }}"
+        method="POST"
+        onsubmit="return validateForm3()"
+      >
+        <label for="from2">From</label>
+        <input
+          type="text"
+          id="from2"
+          name="from2"
+          placeholder="Enter Student ID"
+        />
+        <br />
+        <label for="to2">To</label>
+        <input type="text" id="to2" name="to2" placeholder="Enter Student ID" />
+        <br />
+        <label for="dateSelect">Select Date:</label>
+        <input type="date" id="dateSelect" name="dateSelect" />
+        <br />
+        <button type="submit" class="export3">Export CSV</button>
+    </form>
+    </div>
+</body>
+</html>

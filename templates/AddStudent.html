@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>SnapAttendance</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+      body {
+        background: wheat;
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 8% auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 3%;
+
+        small {
+          display: block;
+          font-size: 15px;
+          padding-top: 8px;
+          color: gray;
+        }
+      }
+
+      .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        background-color: #231a6f;
+        border: none;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #0f054c;
+      }
+
+      .transparent-form {
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: -2%;
+      }
+
+      .transparent-form input {
+        width: 40%;
+        padding: 10px;
+        font-size: 16px;
+        background: transparent;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #515e5e;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+      }
+
+      .transparent-form input:hover {
+        border-bottom: 2px solid #0659f4;
+      }
+
+      .transparent-form button {
+        font-size: 24px;
+        color: white;
+        padding: 1%;
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        position: relative;
+        border: none;
+        background: none;
+        background-color: black;
+        text-transform: capitalize;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition-duration: 200ms;
+        transition-property: color;
+        border-radius: 5px;
+      }
+
+      .transparent-form button:focus,
+      .transparent-form button:hover {
+        color: black;
+        background: none;
+        transition: 0.3s;
+      }
+
+      .transparent-form button:focus:after,
+      .transparent-form button:hover:after {
+        width: 100%;
+        left: 0%;
+      }
+
+      .transparent-form button:after {
+        content: "";
+        pointer-events: none;
+        bottom: -2px;
+        left: 50%;
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        background-color: #0659f4;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition-duration: 400ms;
+        transition-property: width, left;
+      }
+
+      @media (max-width: 600px) {
+        .transparent-form input {
+          width: 100%;
+          font-size: 16px;
+        }
+
+        .transparent-form button {
+          padding: 12px 20px;
+        }
+
+        .transparent-form div {
+          display: block;
+          /* Show the div on smaller screens */
+          margin-right: 67%;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+
+      @media (min-width: 601px) {
+        .transparent-form div {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Add Student</h1>
+      <button class="back-button" onclick="goBack()">Back</button>
+      <div class="transparent-form">
+        <form
+          onsubmit="return submitForm()"
+          id="myForm"
+          enctype="multipart/form-data"
+          action="/submit"
+          method="POST"
+        >
+          <input
+            type="text"
+            id="StudentID"
+            placeholder="Enter Student ID"
+            name="StudentID"
+          />
+          <input
+            type="text"
+            id="StudentName"
+            placeholder="Enter Student Name"
+            name="StudentName"
+          />
+          <div style="margin-bottom: 5px">Date of Birth</div>
+          <input
+            type="date"
+            id="StudentDOB"
+            placeholder="Select DOB"
+            name="StudentDOB"
+          />
+          <input
+            type="text"
+            id="rollNumber"
+            placeholder="Enter Roll Number"
+            name="rollNumber"
+          />
+          <input
+            type="text"
+            id="StudentClass"
+            placeholder="Enter Student Class"
+            name="StudentClass"
+          />
+          <input
+            type="text"
+            id="StudentDivision"
+            placeholder="Enter Student Division"
+            name="StudentDivision"
+          />
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter Student Email ID"
+            name="email"
+          />
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter Phone Number"
+            name="phone"
+          />
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      function submitForm() {
+        // 1. Add "STUD" prefix to Student ID
+        var studentID = "STUD" + $("#StudentID").val();
+        if (!studentID) {
+          alert("Student ID is compulsory.");
+          return false;
+        }
+
+        // 2. Capitalize the first letter of Student Name
+        var studentName = $("#StudentName")
+          .val()
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+        if (!studentName) {
+          alert("Student Name is compulsory.");
+          return false;
+        }
+
+        // 3. Add DOB label as a placeholder in the date input
+        var studentDOB = $("#StudentDOB").val();
+        if (!studentDOB) {
+          alert("Date of Birth is compulsory.");
+          return false;
+        }
+
+        // 4. Validate Roll Number (9 digits)
+        var rollNumber = $("#rollNumber").val();
+        if (!/^\d{9}$/.test(rollNumber)) {
+          alert("Roll number must be 9 digits.");
+          return false;
+        }
+
+        // 5. Convert Division to uppercase
+        var studentDivision = $("#StudentDivision").val().toUpperCase();
+        if (!studentDivision) {
+          alert("Division is compulsory.");
+          return false;
+        }
+
+        // 6. Validate Email
+        var email = $("#email").val();
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+          alert("Invalid email address.");
+          return false;
+        }
+
+        // 7. Validate Phone Number (10 digits)
+        var phone = $("#phone").val();
+        if (!/^\d{10}$/.test(phone)) {
+          alert("Phone number must be 10 digits.");
+          return false;
+        }
+
+        // 8. Submit the form using AJAX
+        var formData = new FormData();
+        formData.append("StudentID", studentID);
+        formData.append("rollNumber", rollNumber);
+        formData.append("StudentName", studentName);
+        formData.append("StudentDOB", studentDOB);
+        formData.append("StudentClass", $("#StudentClass").val().toUpperCase());
+        formData.append("StudentDivision", studentDivision);
+        formData.append("email", email);
+        formData.append("phone", phone);
+
+        $.ajax({
+          type: "POST",
+          url: "/submit",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            alert(response.message);
+            // Reset the form on success
+            document.getElementById("myForm").reset();
+          },
+          error: function (xhr, status, error) {
+            alert(JSON.parse(xhr.responseText).message);
+          },
+        });
+
+        return false; // Prevent the form from submitting traditionally
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

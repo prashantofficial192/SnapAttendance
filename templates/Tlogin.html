@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>SnapAttendance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .background {
+            width: 100%;
+            max-width: 430px;
+            height: 380px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(#1845ad, #23a2f6);
+            left: -80px;
+            top: -30px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right, #ff512f, #f09819);
+            right: -80px;
+            bottom: -30px;
+        }
+
+        form {
+            max-width: 360px;
+            width: 80%;
+            margin: 0 auto;
+            padding: 50px 35px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        }
+
+        form h3 {
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 30px;
+            border-color: black;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: black;
+        }
+
+        button {
+            margin-top: 35px;
+            margin-left: 25px;
+            width: calc(100% - 50px);
+            background-color: #231a6f;
+            border: none;
+            color: #FFFFFF;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0f054c;
+        }
+
+        .btn-login {
+            color: white;
+            text-decoration: none;
+        }
+
+        .teacher-link {
+            text-align: center;
+            margin-top: 20px;
+            color: black;
+            cursor: pointer;
+        }
+
+        .teacher-link a {
+            text-decoration: none;
+        }
+
+        .teacher-link:hover {
+            color: #f0f0f0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #231a6f;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            z-index: 2;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0f054c;
+        }
+
+        /* Media Query for screens with a maximum width of 600 pixels */
+        @media (max-width: 600px) {
+            .background {
+                max-width: 0%;
+            }
+
+            form {
+                width: 100%;
+                padding: 15% 5%;
+                margin-top: -15%;
+            }
+
+            form h3 {
+                font-size: 29px;
+            }
+
+            button {
+                margin-left: 0;
+                width: calc(100% - 0px);
+            }
+
+            .shape:first-child {
+                background: linear-gradient(#1845ad, #23a2f6);
+                left: -240px;
+                top: -170px;
+            }
+
+            .shape:last-child {
+                background: linear-gradient(to right, #ff512f, #f09819);
+                right: -240px;
+                bottom: -50px;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ url_for('role_page')}}" class="back-button">Back</a>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form>
+        <h3>Sign in as Teacher</h3>
+
+        <label for="teacherid">Teacher ID
+            <input type="text" placeholder="Enter Teacher ID" id="teacher">
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Enter Password" id="password">
+
+            <button id="loginButton"><a class="btn-login" href="#">Login</a></button>
+
+            <p class="teacher-link"><a href="{{ url_for('student_login') }}">Are you a Student? Click here</a></p>
+    </form>
+
+    <!-- Script for redirection based on credentials -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var loginButton = document.getElementById('loginButton');
+
+            loginButton.addEventListener('click', function () {
+                var teacherId = document.getElementById('teacher').value.toLowerCase();
+                var password = document.getElementById('password').value.toLowerCase();
+
+                if (teacherId === 'teacher' && password === 'password') {
+                    window.location.href = '{{ url_for("teacher_dashboard")}}';
+                } else {
+                    alert('Invalid credentials. Please check your Teacher ID and Password.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

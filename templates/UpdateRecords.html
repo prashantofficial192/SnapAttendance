@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Update Records</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-image: linear-gradient(
+          25deg,
+          #007ce6,
+          #5a92e3,
+          #81aadf,
+          #9fc2da
+        );
+        background-repeat: no-repeat;
+        height: 92vh;
+      }
+
+      #updateForm {
+        max-width: 800px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0px 28px rgba(0, 0, 0, 0.5);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 5%;
+      }
+
+      .input-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .input-column {
+        width: 48%;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+        box-sizing: border-box;
+        font-size: 14px;
+        transition: border-bottom 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        border-bottom: 1px solid;
+        outline: none;
+      }
+
+      .button-row {
+        justify-content: space-between;
+        margin-top: 25px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      #deleteBtn {
+        background-color: #f44336;
+        margin-left: 10px;
+      }
+
+      #deleteBtn:hover {
+        background-color: #d32f2f;
+      }
+
+      .back-button {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #231a6f;
+        color: white;
+        border-radius: 1px;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #0f054c;
+      }
+
+      @media screen and (max-width: 600px) {
+        .input-column {
+          width: 100%;
+        }
+
+        #updateForm {
+          margin-top: 10%;
+        }
+
+        .button-row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div id="updateForm">
+      <h2>Update Records</h2>
+      <form
+        id="updateForm1"
+        action="{{ url_for('update_records_app.update_records_form') }}"
+        method="POST"
+      >
+        <div class="input-row">
+          <div class="input-column">
+            <label for="studentId">Student ID:</label>
+            <input
+              type="text"
+              id="studentId"
+              name="student_id"
+              oninput="fetchStudentData(this.value)"
+              required
+            />
+          </div>
+          <div class="input-column">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="student_name" />
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div class="input-column">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="student_dob" />
+          </div>
+          <div class="input-column">
+            <label for="rollNumber">Roll Number:</label>
+            <input type="text" id="rollNumber" name="roll_number" />
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div class="input-column">
+            <label for="studentClass">Student Class:</label>
+            <input type="text" id="studentClass" name="student_class" />
+          </div>
+          <div class="input-column">
+            <label for="studentDivision">Student Division:</label>
+            <input type="text" id="studentDivision" name="student_division" />
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div class="input-column">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div class="input-column">
+            <label for="phone">Mobile Number:</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button type="button" onclick="updateStudentRecord()">Update</button>
+          <button id="deleteBtn" type="button" onclick="deleteStudentRecord()">
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function resetForm() {
+        document.getElementById("updateForm1").reset();
+      }
+
+      let fetchTimeout;
+
+      function fetchStudentData(studentId) {
+        // Clear the previous timeout to avoid making multiple requests
+        clearTimeout(fetchTimeout);
+
+        // Set a new timeout to wait for the user to stop typing
+        fetchTimeout = setTimeout(() => {
+          // Fetch student data based on studentId using AJAX
+          fetch("/update_records/fetch_student_data", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: "student_id=" + studentId,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Student not found");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // Populate the fields with the fetched data
+              document.getElementById("studentName").value = data[2];
+              document.getElementById("dob").value = data[3];
+              document.getElementById("rollNumber").value = data[4];
+              document.getElementById("studentClass").value = data[5];
+              document.getElementById("studentDivision").value = data[6];
+              document.getElementById("email").value = data[7];
+              document.getElementById("phone").value = data[8];
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Student not found");
+            });
+        }, 2000); // Adjust the timeout duration (in milliseconds) based on your preference
+      }
+
+      function updateStudentRecord() {
+        // Get the form data
+        const formData = new FormData(document.getElementById("updateForm1"));
+
+        // Convert the form data to an object
+        const formObject = {};
+        formData.forEach((value, key) => {
+          formObject[key] = value;
+        });
+
+        // Implement the logic to update the student record in the database using AJAX
+        fetch("/update_records/update_student_record", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formObject),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            resetForm(); // Reset the form after updating
+            // You can add more logic here to handle the success message,
+            // for example, updating UI elements or displaying a success message on the webpage
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function deleteStudentRecord() {
+        // Get the student ID for deletion
+        const studentId = document.getElementById("studentId").value;
+
+        // Implement the logic to delete the student record from the database using AJAX
+        fetch("/update_records/delete_student_record", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: "student_id=" + studentId,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message);
+            resetForm(); // Reset the form after deleting
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

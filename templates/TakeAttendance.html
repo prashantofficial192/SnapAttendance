@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take Attendance</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 70%;
+        margin: 5% 13%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      select {
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-right: 1%;
+      }
+
+      #subject,
+      #teacher {
+        border-radius: 15px;
+      }
+
+      #takeAttendanceButton {
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #09158f;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 2%;
+        margin-right: 1%;
+      }
+
+      .back-button {
+        position: absolute;
+        top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        left: 10px;
+        background-color: #231a6f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #0f054c;
+      }
+
+      table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 5%;
+        margin-left: 5%;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .container {
+          padding: 20px;
+          margin: 20% 5%;
+          max-width: 100%;
+        }
+
+        select {
+          width: 83%;
+          margin-top: 2%;
+        }
+
+        #takeAttendanceButton {
+          width: 65%;
+          margin-bottom: 3%;
+        }
+
+        .back-button {
+          width: 30%;
+          height: 6%;
+          position: absolute;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="container">
+      <h1>Take Attendance</h1>
+
+      <label for="subject">Subject :</label>
+      <select id="subject" name="subject">
+        <option value="Python" selected>Python</option>
+        <option value="DBMS">DBMS</option>
+        <option value="Web Designing">Web Designing</option>
+        <option value="Java Programming">Java Programming</option>
+      </select>
+      <label for="teacher">Faculty Name :</label>
+      <select id="teacher" name="teacher">
+        <option value="Prof. Nisha M." selected>Prof. Nisha M.</option>
+        <option value="Prof. Dhaval T.">Prof. Dhaval T.</option>
+        <option value="Prof. Hitesh S.">Prof. Hitesh S.</option>
+        <option value="Prof. Rahul K.">Prof. Rahul K.</option>
+        <!-- ... -->
+      </select>
+
+      <button id="takeAttendanceButton" onclick="startFaceRecognition()">
+        Take Attendance
+      </button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+
+      function startFaceRecognition() {
+        console.log("Start Face Recognition button clicked.");
+        var subject = document.getElementById("subject").value;
+        var teacher = document.getElementById("teacher").value;
+        console.log("Subject:", subject);
+        console.log("Teacher:", teacher);
+
+        // Send AJAX request to the server
+        $.ajax({
+          type: "POST",
+          url: "/attendance/take_attendance",
+          data: { subject: subject, teacher: teacher },
+          success: function (response) {
+            console.log("Attendance taken successfully!");
+            alert("Attendance taken successfully!");
+          },
+          error: function (error) {
+            console.error("Error taking attendance:", error);
+            alert("Error taking attendance!");
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

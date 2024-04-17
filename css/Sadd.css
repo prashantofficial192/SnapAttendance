@@ -1,0 +1,162 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.background {
+    width: 100%;
+    max-width: 430px;
+    height: 380px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#1845ad, #23a2f6);
+    left: -100px;
+    top: -50px;
+}
+
+.shape:last-child {
+    background: linear-gradient(to right, #ff512f, #f09819);
+    right: -100px;
+    bottom: -50px;
+}
+
+.add-student-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    margin-bottom: 10%;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ddd;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 5%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-picture:hover {
+    transform: scale(1.1);
+}
+
+input[type="file"] {
+    display: none;
+    font-weight: bold;
+}
+
+label {
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+    margin-bottom: 5%;
+}
+
+label:hover {
+    color: #0056b3;
+}
+
+.details-section {
+    max-width: 400px;
+    width: 100%;
+}
+
+input {
+    width: 80%;
+    margin-top: 2%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #1845ad;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease-in-out;
+}
+
+input:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #ff512f;
+}
+
+button {
+    background-color: #231a6f;
+    color: white;
+    margin-top: 2%;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0f054c;
+}
+/* Added styles for the Back button */
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 7px 12px;
+    text-decoration: none;
+    background-color: #231a6f;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: #0f054c;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .add-student-container {
+        margin: 15px;
+        padding: 10%;
+    }
+    input{
+        width: 90%;
+        padding: 5%;
+        
+    }
+    .back-button{
+        padding: 3% 5%;
+        width: 10%;
+        font-size: 16px;
+    }
+    button{
+        padding: 5%;
+        margin-top: 4%;
+        font-size: 16px;
+    }
+}
